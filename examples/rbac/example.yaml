@@ -1,0 +1,11 @@
+apiVersion: rbac.vault.jet.crossplane.io/v1alpha1
+kind: Policy
+metadata:
+  name: my-policy
+spec:
+  forProvider:
+    name: "my-policy-test"
+    policy: |-
+      path "secret/my_app" {
+        capabilities = ["update"]
+      }

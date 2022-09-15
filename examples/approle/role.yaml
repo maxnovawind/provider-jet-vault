@@ -1,0 +1,12 @@
+apiVersion: approle.vault.jet.crossplane.io/v1alpha1
+kind: Role
+metadata:
+  name: hsbc-ma-preprod
+spec:
+  forProvider:
+    roleName: hsbc-ma-preprod
+    roleId: hsbc-ma-preprod
+    backend: approle
+    tokenPolicies:
+    - default
+    - my-policy-test

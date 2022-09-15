@@ -23,12 +23,14 @@ import (
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	"github.com/crossplane-contrib/provider-jet-template/config/null"
+	"github.com/maxnovawind/provider-jet-vault/config/approle"
+	"github.com/maxnovawind/provider-jet-vault/config/auth"
+	"github.com/maxnovawind/provider-jet-vault/config/policy"
 )
 
 const (
-	resourcePrefix = "template"
-	modulePath     = "github.com/crossplane-contrib/provider-jet-template"
+	resourcePrefix = "vault"
+	modulePath     = "github.com/maxnovawind/provider-jet-vault"
 )
 
 //go:embed schema.json
@@ -44,11 +46,19 @@ func GetProvider() *tjconfig.Provider {
 	}
 
 	pc := tjconfig.NewProviderWithSchema([]byte(providerSchema), resourcePrefix, modulePath,
-		tjconfig.WithDefaultResourceFn(defaultResourceFn))
+		tjconfig.WithDefaultResourceFn(defaultResourceFn),
+		tjconfig.WithIncludeList([]string{
+			"vault_auth_backend$",
+			"vault_policy$",
+			"vault_approle_auth_backend_role$",
+			"vault_approle_auth_backend_role_secret_id$",
+		}))
 
 	for _, configure := range []func(provider *tjconfig.Provider){
 		// add custom config functions
-		null.Configure,
+		auth.Configure,
+		policy.Configure,
+		approle.Configure,
 	} {
 		configure(pc)
 	}

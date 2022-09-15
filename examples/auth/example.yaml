@@ -1,0 +1,9 @@
+apiVersion: auth.vault.jet.crossplane.io/v1alpha1
+kind: Mount
+metadata:
+  name: example
+spec:
+  forProvider:
+    path: "kubernetes-crossplane"
+    type: "kubernetes"
+    description: "Test kubernetes crossplane auth path"

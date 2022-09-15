@@ -21,16 +21,22 @@ import (
 
 	"github.com/crossplane/terrajet/pkg/controller"
 
-	resource "github.com/crossplane-contrib/provider-jet-template/internal/controller/null/resource"
-	providerconfig "github.com/crossplane-contrib/provider-jet-template/internal/controller/providerconfig"
+	role "github.com/maxnovawind/provider-jet-vault/internal/controller/approle/role"
+	secret "github.com/maxnovawind/provider-jet-vault/internal/controller/approle/secret"
+	mount "github.com/maxnovawind/provider-jet-vault/internal/controller/auth/mount"
+	providerconfig "github.com/maxnovawind/provider-jet-vault/internal/controller/providerconfig"
+	policy "github.com/maxnovawind/provider-jet-vault/internal/controller/rbac/policy"
 )
 
 // Setup creates all controllers with the supplied logger and adds them to
 // the supplied manager.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
-		resource.Setup,
+		role.Setup,
+		secret.Setup,
+		mount.Setup,
 		providerconfig.Setup,
+		policy.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
