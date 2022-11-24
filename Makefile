@@ -51,7 +51,7 @@ GO111MODULE = on
 # ====================================================================================
 # Setup Images
 
-DOCKER_REGISTRY ?= registry.gitlab.com/ica1/paas
+DOCKER_REGISTRY ?= registry.gitlab.com/ica1/paas/provider-jet-vault
 IMAGES = provider-jet-vault provider-jet-vault-controller
 -include build/makelib/image.mk
 

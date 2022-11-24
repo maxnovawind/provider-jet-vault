@@ -24,6 +24,7 @@ import (
 	role "github.com/maxnovawind/provider-jet-vault/internal/controller/approle/role"
 	secret "github.com/maxnovawind/provider-jet-vault/internal/controller/approle/secret"
 	mount "github.com/maxnovawind/provider-jet-vault/internal/controller/auth/mount"
+	secretgeneric "github.com/maxnovawind/provider-jet-vault/internal/controller/generic/secret"
 	providerconfig "github.com/maxnovawind/provider-jet-vault/internal/controller/providerconfig"
 	policy "github.com/maxnovawind/provider-jet-vault/internal/controller/rbac/policy"
 )
@@ -35,6 +36,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		role.Setup,
 		secret.Setup,
 		mount.Setup,
+		secretgeneric.Setup,
 		providerconfig.Setup,
 		policy.Setup,
 	} {

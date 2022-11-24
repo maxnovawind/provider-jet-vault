@@ -380,6 +380,16 @@ func (in *SecretParameters) DeepCopyInto(out *SecretParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RoleNameRef != nil {
+		in, out := &in.RoleNameRef, &out.RoleNameRef
+		*out = new(v1.Reference)
+		**out = **in
+	}
+	if in.RoleNameSelector != nil {
+		in, out := &in.RoleNameSelector, &out.RoleNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SecretIDSecretRef != nil {
 		in, out := &in.SecretIDSecretRef, &out.SecretIDSecretRef
 		*out = new(v1.SecretKeySelector)

@@ -1,6 +1,7 @@
 package approle
 
 import (
+	"github.com/crossplane/terrajet/pkg/config"
 	tjconfig "github.com/crossplane/terrajet/pkg/config"
 )
 
@@ -15,5 +16,8 @@ func Configure(p *tjconfig.Provider) {
 		r.ExternalName = tjconfig.IdentifierFromProvider
 		r.ShortGroup = "approle"
 		r.Kind = "Secret"
+		r.References["role_name"] = config.Reference{
+			Type: "Role",
+		}
 	})
 }

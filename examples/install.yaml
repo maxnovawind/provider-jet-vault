@@ -6,7 +6,7 @@ metadata:
   labels:
     app: crossplane-provider-jet-vault
 spec:
-  image: crossplane/provider-jet-vault-controller:v0.1.0
+  image: registry.gitlab.com/ica1/paas/provider-jet-vault-controller-amd64:v0.1.0
   args: ["-d"]
 ---
 apiVersion: pkg.crossplane.io/v1
@@ -14,6 +14,6 @@ kind: Provider
 metadata:
   name: crossplane-provider-jet-vault
 spec:
-  package: crossplane/provider-jet-vault:v0.1.0
+  package: registry.gitlab.com/ica1/paas/provider-jet-vault-amd64:v0.1.0
   controllerConfigRef:
     name: jet-vault-config

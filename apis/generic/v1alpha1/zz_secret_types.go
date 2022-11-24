@@ -26,53 +26,30 @@ import (
 )
 
 type SecretObservation struct {
-	Accessor *string `json:"accessor,omitempty" tf:"accessor,omitempty"`
-
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	WrappingAccessor *string `json:"wrappingAccessor,omitempty" tf:"wrapping_accessor,omitempty"`
 }
 
 type SecretParameters struct {
 
-	// Unique name of the auth backend to configure.
-	// +kubebuilder:validation:Optional
-	Backend *string `json:"backend,omitempty" tf:"backend,omitempty"`
-
-	// List of CIDR blocks that can log in using the SecretID.
-	// +kubebuilder:validation:Optional
-	CidrList []*string `json:"cidrList,omitempty" tf:"cidr_list,omitempty"`
-
 	// JSON-encoded secret data to write.
+	// +kubebuilder:validation:Required
+	DataJSONSecretRef v1.SecretKeySelector `json:"dataJsonSecretRef" tf:"-"`
+
+	// Only applicable for kv-v2 stores. If set, permanently deletes all versions for the specified key.
 	// +kubebuilder:validation:Optional
-	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+	DeleteAllVersions *bool `json:"deleteAllVersions,omitempty" tf:"delete_all_versions,omitempty"`
+
+	// Don't attempt to read the token from Vault if true; drift won't be detected.
+	// +kubebuilder:validation:Optional
+	DisableRead *bool `json:"disableRead,omitempty" tf:"disable_read,omitempty"`
 
 	// Target namespace. (requires Enterprise)
 	// +kubebuilder:validation:Optional
 	Namespace *string `json:"namespace,omitempty" tf:"namespace,omitempty"`
 
-	// Name of the role.
-	// +crossplane:generate:reference:type=Role
-	// +kubebuilder:validation:Optional
-	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
-
-	// +kubebuilder:validation:Optional
-	RoleNameRef *v1.Reference `json:"roleNameRef,omitempty" tf:"-"`
-
-	// +kubebuilder:validation:Optional
-	RoleNameSelector *v1.Selector `json:"roleNameSelector,omitempty" tf:"-"`
-
-	// The SecretID to be managed. If not specified, Vault auto-generates one.
-	// +kubebuilder:validation:Optional
-	SecretIDSecretRef *v1.SecretKeySelector `json:"secretIdSecretRef,omitempty" tf:"-"`
-
-	// Use the wrapped secret-id accessor as the id of this resource. If false, a fresh secret-id will be regenerated whenever the wrapping token is expired or invalidated through unwrapping.
-	// +kubebuilder:validation:Optional
-	WithWrappedAccessor *bool `json:"withWrappedAccessor,omitempty" tf:"with_wrapped_accessor,omitempty"`
-
-	// The TTL duration of the wrapped SecretID.
-	// +kubebuilder:validation:Optional
-	WrappingTTL *string `json:"wrappingTtl,omitempty" tf:"wrapping_ttl,omitempty"`
+	// Full path where the generic secret will be written.
+	// +kubebuilder:validation:Required
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 // SecretSpec defines the desired state of Secret
