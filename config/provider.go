@@ -25,6 +25,7 @@ import (
 
 	"github.com/maxnovawind/provider-jet-vault/config/approle"
 	"github.com/maxnovawind/provider-jet-vault/config/auth"
+	"github.com/maxnovawind/provider-jet-vault/config/generic"
 	"github.com/maxnovawind/provider-jet-vault/config/policy"
 )
 
@@ -50,6 +51,7 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithIncludeList([]string{
 			"vault_auth_backend$",
 			"vault_policy$",
+			"vault_generic_secret$",
 			"vault_approle_auth_backend_role$",
 			"vault_approle_auth_backend_role_secret_id$",
 		}))
@@ -59,6 +61,7 @@ func GetProvider() *tjconfig.Provider {
 		auth.Configure,
 		policy.Configure,
 		approle.Configure,
+		generic.Configure,
 	} {
 		configure(pc)
 	}

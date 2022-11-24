@@ -24,6 +24,7 @@ import (
 
 	v1alpha1 "github.com/maxnovawind/provider-jet-vault/apis/approle/v1alpha1"
 	v1alpha1auth "github.com/maxnovawind/provider-jet-vault/apis/auth/v1alpha1"
+	v1alpha1generic "github.com/maxnovawind/provider-jet-vault/apis/generic/v1alpha1"
 	v1alpha1rbac "github.com/maxnovawind/provider-jet-vault/apis/rbac/v1alpha1"
 	v1alpha1apis "github.com/maxnovawind/provider-jet-vault/apis/v1alpha1"
 )
@@ -33,6 +34,7 @@ func init() {
 	AddToSchemes = append(AddToSchemes,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1alpha1auth.SchemeBuilder.AddToScheme,
+		v1alpha1generic.SchemeBuilder.AddToScheme,
 		v1alpha1rbac.SchemeBuilder.AddToScheme,
 		v1alpha1apis.SchemeBuilder.AddToScheme,
 	)

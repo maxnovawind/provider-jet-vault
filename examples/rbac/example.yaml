@@ -9,3 +9,5 @@ spec:
       path "secret/my_app" {
         capabilities = ["update"]
       }
+  providerConfigRef:
+    name: vault-config
