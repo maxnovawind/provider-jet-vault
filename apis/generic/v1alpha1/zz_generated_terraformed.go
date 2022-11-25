@@ -32,7 +32,7 @@ func (mg *Secret) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Secret
 func (tr *Secret) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"data": "status.atProvider.data", "data_json": "spec.forProvider.dataJsonSecretRef"}
+	return map[string]string{"data": "status.atProvider.data"}
 }
 
 // GetObservation of this Secret

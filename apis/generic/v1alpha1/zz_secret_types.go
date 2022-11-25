@@ -33,7 +33,7 @@ type SecretParameters struct {
 
 	// JSON-encoded secret data to write.
 	// +kubebuilder:validation:Required
-	DataJSONSecretRef v1.SecretKeySelector `json:"dataJsonSecretRef" tf:"-"`
+	DataJSON *string `json:"dataJson" tf:"data_json,omitempty"`
 
 	// Only applicable for kv-v2 stores. If set, permanently deletes all versions for the specified key.
 	// +kubebuilder:validation:Optional
